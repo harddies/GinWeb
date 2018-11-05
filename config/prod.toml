@@ -1,0 +1,34 @@
+version = "1.0.0"
+name="GinWeb"
+env="prod"
+
+[http]
+    enaled = true
+    listen = "0.0.0.0:8080"
+
+[mysql]
+    [mysql.apihub]
+        datasource = "root:123456@tcp(127.0.0.1:3306)/test?charset=utf8&parseTime=True&loc=Local"
+        timeout = 3000 # 毫秒
+
+[redis]
+    [redis.default]
+        addr = "XXX.XXX.XXX.XXX:6379"
+        password = ""
+        db = 0
+        timeout = 3000 # 毫秒
+
+[log]
+    # log配置，stdout在debug级别才会开启
+    log_level = "debug"     # 高级别会过滤掉低级别的日志，debug<info<warn<error<fatal<panic
+    log_dir = "/data/logs/"
+    log_name = "apihub.log"
+    log_rotate_mode="size"  # 日志切片方式，none size hour day
+    max_size=1024           # 日志切片大小 log_rotate_mode=size此项才会生效
+
+[weixin]
+    api_url = "https://api.weixin.qq.com"
+    secret = ""
+    [weixin.midas]
+        pay_url = "/cgi-bin/midas/sandbox/pay"
+        get_balance_url = "/cgi-bin/midas/sandbox/getbalance"
